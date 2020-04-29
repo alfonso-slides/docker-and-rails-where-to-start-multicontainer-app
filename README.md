@@ -1,24 +1,52 @@
-# README
+# Sample multi-container application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+All the commands should be run from the root folder of the project.
 
-Things you may want to cover:
+## Before running the rails application...
 
-* Ruby version
+* Clone this repository
+* We are using a volume to cache gems and another volume to cache node modules. Run the following commands to warm
+  up those cached volumes:
 
-* System dependencies
+```bash 
+> docker-compose run --rm web bundle install
+> docker-compose run --rm web rails yarn:insall
+```
 
-* Configuration
 
-* Database creation
+## Running the rails application
 
-* Database initialization
+* Create the databases
 
-* How to run the test suite
+```bash
+> docker-compose run --rm web rails db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+* Seed the database
 
-* Deployment instructions
+```bash
+> docker-compose run --rm web rails db:seed
+```
 
-* ...
+* Run the rails application
+
+```bash
+> docker-compose up
+```
+
+* Point your browser to `localhost:3000` as usual
+
+
+## Shutdown the rails application
+
+```bash
+> docker-compose down
+```
+
+If you want to clear all the volumes run
+
+```bash 
+> docker-compose down -v
+```
+
+If you run this last command, you will erease all the persisted data **including the database**, the cached gems and the cached node modules.
