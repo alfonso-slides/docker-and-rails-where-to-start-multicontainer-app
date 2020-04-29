@@ -25,6 +25,8 @@ services:
       - .:/app  
       - gems_cache:/usr/local/bundle
       - node_modules_cache:/app/node_modules
+    depends_on:
+      - db    
 
 volumes:
   db_data:
