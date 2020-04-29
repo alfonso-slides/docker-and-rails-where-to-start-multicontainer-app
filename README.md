@@ -22,6 +22,12 @@ All the commands should be run from the root folder of the project.
 > docker-compose run --rm web rails db:create
 ```
 
+* Load the database schema:
+
+```bash
+docker-compose run --rm web rails db:schema:load
+```
+
 * Seed the database
 
 ```bash
